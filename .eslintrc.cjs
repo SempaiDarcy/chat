@@ -29,6 +29,14 @@ module.exports = {
                 caseInsensitive: true,
             },
         }],
+        'padding-line-between-statements': [
+            'error',
+            { blankLine: 'always', prev: 'import', next: '*' },
+            { blankLine: 'any', prev: 'import', next: 'import' },
+            { blankLine: 'always', prev: '*', next: 'export' },
+            { blankLine: 'any', prev: 'export', next: 'export' }
+        ],
+
     },
     settings: {
         'import/resolver': {
