@@ -1,9 +1,3 @@
 export const App = () => {
-
-  return (
-    <>
-        Hello
-    </>
-  )
+  return <>Hello</>
 }
-
