@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
     "prettify": "prettier --write 'src/**/*.{ts,tsx,css,scss}'",
+    "lint:scss": "stylelint \"**/*.scss\"",
     "prepare": "husky install",
     "pre-commit": "pnpm run lint && pnpm run format",
     "preview": "vite preview"
@@ -32,6 +33,9 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "husky": "^8.0.3",
     "prettier": "^3.1.1",
+    "sass": "^1.69.5",
+    "stylelint": "^16.0.2",
+    "stylelint-config-standard-scss": "^12.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }

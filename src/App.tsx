@@ -1,3 +1,4 @@
+import s from '@/app.module.scss'
 export const App = () => {
-  return <>Hello</>
+  return <div className={s.container}>Hello</div>
 }
