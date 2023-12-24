@@ -38,8 +38,18 @@ module.exports = {
             position: 'before',
           },
           {
+            pattern: 'react-router-dom',
+            group: 'external',
+            position: 'before',
+          },
+          {
             pattern: 'antd',
             group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: '**/*.tsx',
+            group: 'parent',
             position: 'after',
           },
           {
@@ -48,8 +58,8 @@ module.exports = {
             position: 'after',
           },
           {
-            pattern: '**/*.tsx',
-            group: 'parent',
+            pattern: '**/*.css',
+            group: 'unknown',
             position: 'after',
           },
         ],
