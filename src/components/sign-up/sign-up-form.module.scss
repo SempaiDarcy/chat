@@ -1,0 +1,31 @@
+.signUp {
+  width: 400px;
+  padding: 29px 30px;
+  border-radius: 2px;
+  box-shadow:
+    1px 1px 2px rgb(0 0 0 / 10%),
+    -1px -1px 2px rgb(0 0 0 / 10%);
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.subTitle {
+  font-size: 18px;
+  color: #8c8c8c;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+.signUp {
+  cursor: pointer;
+}
