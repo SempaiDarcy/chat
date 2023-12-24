@@ -1,11 +1,19 @@
-import s from '@/app.module.scss'
-import { Button } from '@/components/ui/button/button'
+import { Route, Routes } from 'react-router-dom'
+
+import Layout from 'antd/es/layout/layout'
+
+import { SignInForm } from '@/components/sign-in'
+import { SignUpForm } from '@/components/sign-up'
+
+import './app.css'
 
 export const App = () => {
   return (
-    <div className={s.container}>
-      <h1>Hello</h1>
-      <Button />
-    </div>
+    <Layout className={'app'}>
+      <Routes>
+        <Route path={'/'} element={<SignInForm />} />
+        <Route path={'/sign-up'} element={<SignUpForm />} />
+      </Routes>
+    </Layout>
   )
 }

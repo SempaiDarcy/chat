@@ -1,6 +1,10 @@
-.container {
+@import 'antd/dist/reset.css';
+
+.app {
   display: flex;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: #fff;
 }
