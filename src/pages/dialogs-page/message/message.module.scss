@@ -1,0 +1,86 @@
+.message {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: var(--color-light-100);
+
+  .messageBubble {
+    background: var(--color-info-500);
+    box-shadow: 0 5px 5px rgb(54 116 255 / 19.7%);
+    border-radius: 12px 12px 12px 0;
+    padding: 5px;
+  }
+
+  .messageText {
+    max-width: 440px;
+    color: var(--color-light-100);
+    margin: 3px;
+    line-height: 20px;
+  }
+
+  .messageDate {
+    font-size: 12px;
+    opacity: 0.5;
+  }
+}
+
+.messageIsMe {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  background-color: var(--color-light-100);
+
+  .messageBubble {
+    background: var(--color-light-300);
+    box-shadow: 0 5px 5px rgb(54 116 255 / 19.7%);
+    border-radius: 12px 12px 0;
+    padding: 5px;
+  }
+
+  .messageText {
+    max-width: 440px;
+    color: var(--color-dark-500);
+    margin: 3px;
+    line-height: 20px;
+  }
+
+  .messageDate {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    font-size: 12px;
+    opacity: 0.5;
+  }
+}
+
+.messageAvatar {
+  display: flex;
+  flex-direction: column-reverse;
+
+  img {
+    width: 33px;
+    height: 33px;
+    border-radius: 16.5px;
+    border: 1px solid var(--color-light-300);
+    margin-bottom: 20px;
+  }
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.messageAttachments {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+
+  img {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
