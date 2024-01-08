@@ -1,13 +1,14 @@
-import { FC } from 'react'
+import React from 'react'
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Rule } from 'antd/lib/form'
+import { useField } from 'formik'
 
 import { Form, Input } from 'antd'
 
+type ValidateStatus = 'error' | 'success' | 'warning' | 'validating'
+
 type TextFieldProps = {
   name: string
-  rules: Rule[]
   type?: 'text' | 'password'
   placeholder?: string
   size?: 'large' | 'small'
@@ -16,9 +17,8 @@ type TextFieldProps = {
   icon?: boolean
 }
 
-export const TextField: FC<TextFieldProps> = ({
+export const TextField: React.FC<TextFieldProps> = ({
   name,
-  rules,
   type = 'text',
   placeholder,
   size,
@@ -26,34 +26,45 @@ export const TextField: FC<TextFieldProps> = ({
   validateStatus,
   icon,
 }) => {
+  const [field, meta] = useField(name)
+
+  // Определяем иконку в зависимости от типа поля
+  const prefixIcon = icon ? (
+    type === 'password' ? (
+      <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
+    ) : (
+      <UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
+    )
+  ) : null
+
+  // Создаем элемент Input в зависимости от типа
   const inputElement =
     type === 'password' ? (
       <Input.Password
+        {...field}
         placeholder={placeholder}
         size={size}
-        prefix={
-          icon ? <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} /> : ''
-        }
+        prefix={prefixIcon}
       />
     ) : (
       <Input
+        {...field}
         placeholder={placeholder}
         size={size}
-        prefix={
-          icon ? <UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} /> : ''
-        }
+        prefix={prefixIcon}
       />
     )
+
+  const validationStatus = meta.touched && meta.error ? 'error' : validateStatus
 
   return (
     <Form.Item
       name={name}
-      rules={rules}
       hasFeedback={hasFeedback}
-      validateStatus={validateStatus}
+      validateStatus={validationStatus}
+      help={meta.touched && meta.error ? meta.error : ''}
     >
       {inputElement}
     </Form.Item>
   )
 }
-type ValidateStatus = 'error' | 'success' | 'warning' | 'validating'

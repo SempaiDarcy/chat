@@ -2,6 +2,9 @@ import { FC } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+
 import { Flex, Form } from 'antd'
 
 import { Button } from '@/components/ui/button/button'
@@ -11,14 +14,32 @@ import { TypedTypography } from '@/components/ui/typography/typography'
 import s from './sign-in-form.module.scss'
 
 export const SignInForm: FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
+  const validationSchema = Yup.object().shape({
+    username: Yup.string()
+      .min(3, 'Логин должен быть не менее 3 символов')
+      .max(20, 'Логин должен быть не более 20 символов')
+      .matches(
+        /^[a-zA-Z0-9_]/,
+        'Логин может содержать только буквы латинского алфавита, цифры и подчеркивания'
+      )
+      .required('Пожалуйста, введите ваш логин!'),
+    password: Yup.string()
+      .min(8, 'Пароль должен быть не менее 8 символов')
+      .matches(
+        /^[a-zA-Z0-9_]+$/,
+        'Пароль должен содержать только буквы латинского алфавита, цифры и подчеркивания'
+      )
+      .matches(/[a-z]/, 'Пароль должен содержать хотя бы одну строчную букву')
+      .matches(/[A-Z]/, 'Пароль должен содержать хотя бы одну заглавную букву')
+      .matches(/[0-9]/, 'Пароль должен содержать хотя бы одну цифру')
+      .required('Пожалуйста, введите ваш пароль!'),
+  })
+  const handleSubmit = async (values: any, actions: any) => {
+    console.log('Success:', values, actions)
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2))
+    }, 1000)
   }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
   return (
     <Flex vertical className={s.signIn}>
       <div className={s.header}>
@@ -29,31 +50,31 @@ export const SignInForm: FC = () => {
           Пожалуйста, войдите в свой аккаунт
         </TypedTypography>
       </div>
-      <Form
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        className={s.form}
+      <Formik
+        initialValues={{ username: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
-        <TextField
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-          placeholder="Username"
-          size={'large'}
-          hasFeedback
-          validateStatus="success"
-          icon={true}
-        />
-        <TextField
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-          type="password"
-          placeholder="Password"
-          size={'large'}
-          icon={true}
-        />
-        <Button type={'primary'} text={'Войти в аккаунт'} size={'large'} />
-      </Form>
+        {({ handleSubmit }) => (
+          <Form onFinish={handleSubmit} className={s.form}>
+            <TextField
+              name="username"
+              placeholder="Username"
+              size="large"
+              hasFeedback
+              icon={true}
+            />
+            <TextField
+              name="password"
+              type="password"
+              placeholder="Password"
+              size="large"
+              icon={true}
+            />
+            <Button type="primary" text="Войти в аккаунт" size="large" />
+          </Form>
+        )}
+      </Formik>
       <Link to={'/sign-up'}>
         <TypedTypography
           variant={'text'}
