@@ -28,7 +28,6 @@ export const TextField: React.FC<TextFieldProps> = ({
 }) => {
   const [field, meta] = useField(name)
 
-  // Определяем иконку в зависимости от типа поля
   const prefixIcon = icon ? (
     type === 'password' ? (
       <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
@@ -37,7 +36,6 @@ export const TextField: React.FC<TextFieldProps> = ({
     )
   ) : null
 
-  // Создаем элемент Input в зависимости от типа
   const inputElement =
     type === 'password' ? (
       <Input.Password

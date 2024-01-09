@@ -24,7 +24,12 @@ export const SignUpForm: FC = () => {
       .oneOf([Yup.ref('password')], 'Пароли не совпадают!')
       .required('Пожалуйста, подтвердите ваш пароль!'),
   })
-
+  const handleSubmit = async (values: any, actions: any) => {
+    console.log('Success:', values, actions)
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2))
+    }, 1000)
+  }
   return (
     <Formik
       initialValues={{
@@ -34,11 +39,9 @@ export const SignUpForm: FC = () => {
         confirmPassword: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        console.log('Success:', values)
-      }}
+      onSubmit={handleSubmit}
     >
-      {() => (
+      {({ handleSubmit }) => (
         <div className={s.signUp}>
           <div className={s.header}>
             <TypedTypography variant={'title'} level={2} style={{ margin: 0 }}>
@@ -48,7 +51,7 @@ export const SignUpForm: FC = () => {
               Для входа в чат, вам нужно зарегистрироваться
             </TypedTypography>
           </div>
-          <Form autoComplete="off" className={s.form}>
+          <Form onFinish={handleSubmit} autoComplete="off" className={s.form}>
             <TextField
               name="email"
               placeholder="E-Mail"
